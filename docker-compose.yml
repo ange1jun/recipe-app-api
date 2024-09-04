@@ -7,7 +7,7 @@
     ports:
       - "8000:8000"
     volumes:
-      - "./app:/app"
+      - ./app:/app
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
     environment:
@@ -27,5 +27,5 @@
       - POSTGRE_USER=devuser
       - POSTGRE_PASSWORD=dummy
 
- volumes:
-  dev-db-data:
+  volumes:
+    dev-db-data:
