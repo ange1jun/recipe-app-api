@@ -241,15 +241,15 @@ class PrivateRecipeApiTests(TestCase):
 
     def test_create_tag_on_update(self):
         """Test Creating tag when updating recipe."""
-        recipe = create_user(user=self.user)
+        recipe = create_recipe(user=self.user)
 
         payload = {'tags': [{'name': 'lunch'}]}
-        url = detail_url
+        url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        new_tag = Tag.objects.get(user=self.user, name='lunch')
-        self.assertEqual(new_tag, recipe.tag.all())
+        new_tag = Tag.objects.get(user=self.user, name='Lunch')
+        self.assertIn(new_tag, recipe.tags.all())
 
 
     def test_update_recipe_assign_tag(self):
@@ -259,7 +259,7 @@ class PrivateRecipeApiTests(TestCase):
         recipe.tags.add(tag_breakfast)
 
         tag_lunch = Tag.objects.create(user=self.user, name='Lunch')
-        payload = {'tag' : [{'name': 'lunch'}]}
+        payload = {'tags' : [{'name': 'Lunch'}]}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
@@ -274,7 +274,7 @@ class PrivateRecipeApiTests(TestCase):
         recipe.tags.add(tag)
 
         payload = {'tags': []}
-        url = detail_url
+        url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
