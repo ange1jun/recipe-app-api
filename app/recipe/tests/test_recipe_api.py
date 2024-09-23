@@ -308,8 +308,8 @@ class PrivateRecipeApiTests(TestCase):
         ingredient = Ingredient.objects.create(user=self.user, name='Lemon')
         payload = {
             'title': 'Vietnamse Soup',
-            'titme_minutes': 25,
-            'prcie': '2.55',
+            'time_minutes': 25,
+            'price': '2.55',
             'ingredients': [{'name': 'Lemon'}, {'name': 'Fish Sauce'}],
         }
         res = self.client.post(RECIPES_URL, payload, format='json')
