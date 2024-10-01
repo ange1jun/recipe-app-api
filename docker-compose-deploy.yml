@@ -11,8 +11,8 @@ services:
       - DB_HOST=db
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
-      - DB_PASS=$(DB_PASS)
-      - SECRET_KET=${DJANGO_SECRET_KEY}
+      - DB_PASS=${DB_PASS}
+      - SECRET_KEY=${DJANGO_SECRET_KEY}
       - ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
     depends_on:
       - db
@@ -27,10 +27,10 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
 
-  porxy:
+  proxy:
     build:
-      context: ./porxy
-    resatrt: always
+      context: ./proxy
+    restart: always
     depends_on:
       - app
     ports:
@@ -38,6 +38,6 @@ services:
     volumes:
       - static-data:/vol/static
 
-  volumes:
-    postgres-data:
-    static-data:
+volumes:
+  postgres-data:
+  static-data:
