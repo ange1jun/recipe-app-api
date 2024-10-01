@@ -18,6 +18,7 @@
         - DB_NAME=devdb
         - DB_USER=devuser
         - DB_PASS=dummy
+        - DEBUG=1
       depends_on:
         - db
 
