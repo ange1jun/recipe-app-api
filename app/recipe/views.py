@@ -64,7 +64,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(ingredients__id__in=ingredient_ids)
 
         return queryset.filter(
-            user = self.request.user
+            user=self.request.user
         ).order_by('-id').distinct()
 
     def get_serializer_class(self):
